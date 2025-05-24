@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WADABA - Water Data Bank</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    
+    <!-- Leaflet CSS for Interactive Map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" 
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" 
+          crossorigin=""/>
+    
+    <style>
+        /* Interactive Map Styling */
+        .interactive-map-container {
+            margin: 30px 0;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .wadaba-interactive-map {
+            height: 500px;
+            width: 100%;
+        }
+
+        /* Map Controls */
+        .map-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .map-btn {
+            background-color: #f5f7fa;
+            color: #2196F3;
+            border: 2px solid #2196F3;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+
+        .map-btn:hover, .map-btn.active {
+            background-color: #2196F3;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(33, 150, 243, 0.3);
+        }
+
+        /* Enhanced Region Cards */
+        .regions-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .region-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border-left: 4px solid #2196F3;
+        }
+
+        .region-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .region-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .region-header h3 {
+            color: #2196F3;
+            margin: 0;
+            font-size: 1.3rem;
+        }
+
+        .region-header h3 i {
+            margin-right: 8px;
+        }
+
+        .region-status {
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .region-status.active {
+            background-color: #e8f5e8;
+            color: #4CAF50;
+        }
+
+        .region-status.coming-soon {
+            background-color: #fff3e0;
+            color: #ff9800;
+        }
+
+        .region-card p {
+            margin: 8px 0;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .region-card p strong {
+            color: #333;
+        }
+
+        .region-stats {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            background-color: #f0f7ff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #2196F3;
+            font-weight: 500;
+        }
+
+        .stat i {
+            margin-right: 5px;
+        }
+
+        /* Custom Popup Styling */
+        .wadaba-popup {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .wadaba-popup h3 {
+            color: #2196F3;
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+        }
+
+        .wadaba-popup p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .wadaba-popup .popup-stats {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+
+        .wadaba-popup .popup-stat {
+            display: inline-block;
+            background-color: #f0f7ff;
+            padding: 3px 8px;
+            margin: 2px;
+            border-radius: 12px;
+            font-size: 12px;
+            color: #2196F3;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .wadaba-interactive-map {
+                height: 400px;
+            }
+            
+            .map-controls {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .map-btn {
+                width: 200px;
+            }
+            
+            .regions-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .region-stats {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .wadaba-interactive-map {
+                height: 350px;
+            }
+            
+            .region-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/wadaba logo.png" alt="WADABA Logo">
+                    <span>WADABA</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="about.html">About</a></li>
+                <li><a href="policy.html">Policy</a></li>
+                <li><a href="get-involved.html">Get Involved</a></li>
+            </ul>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Empowering Africa with Water Data for a Sustainable Future</h1>
+            <p>WADABA is transforming how we collect, manage, and use water data across Africa.</p>
+            <div class="cta-buttons">
+                <a href="about.html" class="btn btn-primary">Learn More</a>
+                <a href="contact.html" class="btn btn-secondary">Partner with Us</a>
+                <a href="get-involved.html" class="btn btn-outlined">Contribute Data</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="intro-section">
+        <div class="container">
+            <div class="intro-content">
+                <h2>Welcome to WADABA</h2>
+                <p>WADABA is an innovative, smart water information platform designed to centralize and standardize water related data across regions. The platform enables governments, utilities, researchers, NGOs, and businesses to access, analyze, and act on real-time and historical water data for better decision making, resource management, and sustainable development. Also, by leveraging citizen science, digital innovation, and collaborative research, WADABA empowers communities, policymakers, and researchers with accurate, timely, and accessible water data.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="features-section">
+        <div class="container">
+            <h2>Our Key Pillars</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-users"></i>
+                    <h3>Citizen Science</h3>
+                    <p>Empowering local communities to collect and validate water data using accessible technologies.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-database"></i>
+                    <h3>Data Accessibility</h3>
+                    <p>Making water information transparent and available to all stakeholders for informed decision-making.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-graduation-cap"></i>
+                    <h3>Capacity Building</h3>
+                    <p>Strengthening skills and knowledge in water monitoring, data analysis, and digital literacy.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-handshake"></i>
+                    <h3>Policy Engagement</h3>
+                    <p>Working with governments and institutions to integrate data-driven approaches into water governance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="regions-preview">
+        <div class="container">
+            <h2>Where We Work</h2>
+            
+            <!-- Interactive Map Container -->
+            <div class="interactive-map-container">
+                <div id="wadaba-map" class="wadaba-interactive-map"></div>
+            </div>
+            
+            <!-- Map Controls -->
+            <div class="map-controls">
+                <button class="map-btn active" data-region="all">View All</button>
+                <button class="map-btn" data-region="cameroon">Cameroon</button>
+                <button class="map-btn" data-region="drc">DR Congo</button>
+            </div>
+            
+            <!-- Region Information Cards -->
+            <div class="regions-list">
+                <div class="region-card" data-region="cameroon">
+                    <div class="region-header">
+                        <h3><i class="fas fa-map-marker-alt"></i> Cameroon</h3>
+                        <span class="region-status active">Active</span>
+                    </div>
+                    <p><strong>Location:</strong> Fako Division</p>
+                    <p><strong>Focus:</strong> Low-income neighborhoods and schools</p>
+                    <p><strong>Data Points:</strong> 15 monitoring stations</p>
+                    <div class="region-stats">
+                        <span class="stat"><i class="fas fa-tint"></i> 120 water samples</span>
+                        <span class="stat"><i class="fas fa-users"></i> 45 citizen scientists</span>
+                    </div>
+                </div>
+                
+                <div class="region-card" data-region="drc">
+                    <div class="region-header">
+                        <h3><i class="fas fa-map-marker-alt"></i> DR Congo</h3>
+                        <span class="region-status active">Active</span>
+                    </div>
+                    <p><strong>Location:</strong> Likassi</p>
+                    <p><strong>Focus:</strong> Urban-rural water equity assessment</p>
+                    <p><strong>Data Points:</strong> 8 monitoring stations</p>
+                    <div class="region-stats">
+                        <span class="stat"><i class="fas fa-tint"></i> 85 water samples</span>
+                        <span class="stat"><i class="fas fa-users"></i> 32 citizen scientists</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="get-involved-preview">
+        <div class="container">
+            <h2>Join the Movement</h2>
+            <div class="involvement-options">
+                <div class="involvement-card">
+                    <h3>For Individuals</h3>
+                    <ul>
+                        <li>Become a Citizen Scientist</li>
+                        <li>Attend Trainings</li>
+                        <li>Volunteer Locally</li>
+                    </ul>
+                    <a href="get-involved.html#individuals" class="btn btn-secondary">Get Started</a>
+                </div>
+                <div class="involvement-card">
+                    <h3>For Organizations</h3>
+                    <ul>
+                        <li>Partner with Us</li>
+                        <li>Sponsor a Data Collection Zone</li>
+                        <li>Collaborate on Research</li>
+                    </ul>
+                    <a href="get-involved.html#organizations" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="news-preview">
+        <div class="container">
+            <h2>Latest News & Stories</h2>
+            <div class="news-grid">
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="images/wat news.jpg" alt="News image">
+                    </div>
+                    <div class="news-content">
+                        <span class="date">May 15, 2025</span>
+                        <h3>New Water Monitoring Stations Deployed in Cameroon</h3>
+                        <p>Ten new monitoring stations have been installed across Fako Division to improve data coverage.</p>
+                        <a href="" class="read-more">Read More</a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="images/wat news 2.jpg" alt="News image">
+                    </div>
+                    <div class="news-content">
+                        <span class="date">May 10, 2025</span>
+                        <h3>Youth Training Workshop Completed in DR Congo</h3>
+                        <p>Over 50 young individuals trained in water quality testing and data collection protocols.</p>
+                        <a href="" class="read-more">Read More</a>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="images/news water 3.jpg" alt="News image">
+                    </div>
+                    <div class="news-content">
+                        <span class="date">May 5, 2025</span>
+                        <h3>New Partnership Announced with Regional University</h3>
+                        <p>Collaboration aims to enhance research capabilities and student involvement in water data science.</p>
+                        <a href="" class="read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="" class="btn btn-outlined">View All News</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="partners-section">
+        <div class="container">
+            <h2>Our Partners</h2>
+            <div class="partners-slider">
+                <div class="partner">
+                    <img src="images/logo partner 1.jpg" alt="Partner logo">
+                </div>
+                <div class="partner">
+                    <img src="images/logo partner 2.png" alt="Partner logo">
+                </div>
+                <div class="partner">
+                    <img src="images/logo partner 3.png" alt="Partner logo">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter-section">
+        <div class="container">
+            <div class="newsletter-container">
+                <div class="newsletter-content">
+                    <h2>Stay Updated</h2>
+                    <p>Subscribe to our newsletter to receive the latest updates on our projects, events, and opportunities.</p>
+                </div>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit" class="btn btn-primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/wadaba logo.png" alt="WADABA Logo">
+                    <p>Water Data Bank</p>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h3>Quick Links</h3>
+                        <ul>
+                            <li><a href="about.html">About</a></li>
+                            <li><a href="regions.html">Where We Work</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Get Involved</h3>
+                        <ul>
+                            <li><a href="get-involved.html#individuals">For Individuals</a></li>
+                            <li><a href="get-involved.html#organizations">For Organizations</a></li>
+                            <li><a href="contact.html">Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h3>Connect</h3>
+                        <div class="social-icons">
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 WADABA - Water Data Bank. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Leaflet JavaScript for Interactive Map -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+            integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" 
+            crossorigin=""></script>
+    
+    <script src="script.js"></script>
+</body>
+</html>

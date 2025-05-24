@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - WADABA</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <!-- Favicon -->
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <style>
+        /* Inline CSS for About page */
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/hero-image.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+            margin-bottom: 50px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .about-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .about-intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .about-intro h2 {
+            color: #2196F3;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .about-intro p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .about-details-card {
+            background: #f5f7fa;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .about-details-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .about-details-card h3 {
+            color: #2196F3;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .about-details-card h3 i {
+            margin-right: 10px;
+        }
+        
+        .about-details-card p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        .team-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .team-section h2 {
+            color: #2196F3;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+        }
+        
+        .team-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.team-member {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 280px;
+    flex-shrink: 0;
+}
+        
+        .team-photo {
+            height: 250px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .team-photo i {
+            font-size: 5rem;
+            color: #999;
+        }
+        
+        .team-info {
+            padding: 20px;
+        }
+        
+        .team-info h3 {
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .team-info p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .team-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .team-social a {
+            color: #2196F3;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+        }
+        
+        .team-social a:hover {
+            color: #1976D2;
+        }
+
+        .values-section {
+            background-color: #f5f7fa;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .values-section h2 {
+            color: #2196F3;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .value-card {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            color: #2196F3;
+            margin-bottom: 20px;
+        }
+        
+        .value-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .value-card p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .approach-section {
+            background-color: #fff;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .approach-section h2 {
+            color: #2196F3;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+        }
+        
+        .approach-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .approach-card {
+            background: #f5f7fa;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .approach-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .approach-icon {
+            font-size: 2.5rem;
+            color: #2196F3;
+            margin-bottom: 20px;
+        }
+        
+        .approach-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .approach-card p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .about-details {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .about-intro h2, .team-section h2, .values-section h2, .approach-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* Footer styling */
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+        }
+        
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/wadaba logo.png" alt="WADABA Logo">
+                    <span>WADABA</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="policy.html">Policy</a></li>
+                <li><a href="getinvolved.html">Get involved</a></li>
+            </ul>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>About WADABA</h1>
+            <p>Learn about our mission, values, and the impact we're making across Africa</p>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="about-intro">
+            <h2>What is WADABA?</h2>
+            <p>The Water Data Bank (WADABA) is a regional initiative led by One Green Africa, with the goal of creating a centralized, citizen-driven water data hub. The project spans African countries including Cameroon, DR Congo and others, addressing gaps in water monitoring, equity, and governance. WADABA is a data-driven, smart water information platform designed to centralize, standardize, and monetize water-related data across regions.</p>
+        </div>
+
+        <div class="about-details">
+            <div class="about-details-card">
+                <h3><i class="fas fa-eye"></i> Our Vision</h3>
+                <p>WADABA envisions a water-secure Africa where communities have access to reliable, clean water resources. We strive for transparent, data-driven water governance that enables informed decision-making and sustainable water management across the continent.</p>
+            </div>
+            <div class="about-details-card">
+                <h3><i class="fas fa-bullseye"></i> Our Mission</h3>
+                <p>Our mission is to empower communities, policymakers, and researchers with accurate, timely, and accessible water data through citizen science, digital innovation, and collaborative research for better decision-making, resource management, and sustainable development.</p>
+            </div>
+            <div class="about-details-card">
+                <h3><i class="fas fa-history"></i> Our History</h3>
+                <p>WADABA was launched as a response to critical gaps in water data collection and monitoring across Africa. Founded through the partnership of Eau-Hygiene-Assainissement Pour Tous-ONG and One Green Africa (OGA), we began with pilot programs in Cameroon and DR Congo.</p>
+            </div>
+            <div class="about-details-card">
+                <h3><i class="fas fa-globe-africa"></i> Our Impact</h3>
+                <p>Our work spans multiple African countries, focusing on water equity in underserved communities, youth engagement in environmental monitoring, and evidence-based policy development for sustainable water resource management.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="values-section">
+        <h2>Our Key Pillars</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Citizen Science</h3>
+                <p>Empowering local communities to collect and validate water data using accessible technologies and participatory approaches.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3>Data Accessibility & Transparency</h3>
+                <p>Making water information transparent and available to all stakeholders for informed decision-making and improved governance.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Capacity Building</h3>
+                <p>Strengthening skills and knowledge in water monitoring, data analysis, digital literacy, and environmental stewardship.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Policy Engagement</h3>
+                <p>Working with governments and institutions to integrate data-driven approaches into water governance and policy development.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="approach-section">
+        <h2>How We Work</h2>
+        <div class="approach-grid">
+            <div class="approach-card">
+                <div class="approach-icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3>Community Mapping</h3>
+                <p>Local volunteers and students collect field data using mobile tools and GPS-enabled applications for comprehensive water resource mapping.</p>
+            </div>
+            <div class="approach-card">
+                <div class="approach-icon">
+                    <i class="fas fa-server"></i>
+                </div>
+                <h3>Digital Infrastructure</h3>
+                <p>All data is stored in an  geospatial platform accessible to specific users, utilizing cloud-based dashboards and analytics tools.</p>
+            </div>
+            <div class="approach-card">
+                <div class="approach-icon">
+                    <i class="fas fa-chalkboard-teacher"></i>
+                </div>
+                <h3>Education & Training</h3>
+                <p>We conduct workshops on water quality testing, data literacy, digital skills, and environmental monitoring techniques.</p>
+            </div>
+            <div class="approach-card">
+                <div class="approach-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Strategic Partnerships</h3>
+                <p>We collaborate with local governments, universities, NGOs, tech partners, and international organizations to maximize impact.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <h2>Our Team</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="team-photo">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="team-info">
+                    <h3>Ewube Egbe</h3>
+                    <p>Leading WADABA's strategic vision and partnerships</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="team-member">
+                <div class="team-photo">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="team-info">
+                    <h3>Nkenen Brendaline</h3>
+                    <p>Overseeing platform development and data management</p>
+                    <div class="team-social">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 WADABA - Water Data Bank. All Rights Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - WADABA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <style>
+        /* Inline CSS for Privacy Policy page - matching About page styling */
+        .hero {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('images/hero-image.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 0;
+            margin-bottom: 50px;
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .about-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .about-intro {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .about-intro h2 {
+            color: #2196F3;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        
+        .about-intro p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .about-details-card {
+            background: #f5f7fa;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .about-details-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .about-details-card h3 {
+            color: #2196F3;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .about-details-card h3 i {
+            margin-right: 10px;
+        }
+        
+        .about-details-card p {
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        .about-details-card ul {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        
+        .about-details-card li {
+            margin-bottom: 8px;
+        }
+        
+        .values-section {
+            background-color: #f5f7fa;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .values-section h2 {
+            color: #2196F3;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .value-card {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            height: 100%;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .value-icon {
+            font-size: 2.5rem;
+            color: #2196F3;
+            margin-bottom: 20px;
+        }
+        
+        .value-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .value-card p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+        }
+        
+        .team-section {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .team-section h2 {
+            color: #2196F3;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+        }
+        
+        .policy-content {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        .policy-content h3 {
+            color: #2196F3;
+            font-size: 1.3rem;
+            margin: 25px 0 15px 0;
+        }
+        
+        .policy-content p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .policy-content ul {
+            margin: 15px 0 15px 25px;
+            color: #666;
+        }
+        
+        .policy-content li {
+            margin-bottom: 8px;
+        }
+        
+        .contact-section {
+            background-color: #f5f7fa;
+            padding: 60px 20px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .contact-section h2 {
+            color: #2196F3;
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+        }
+        
+        .contact-card {
+            background: white;
+            border-radius: 8px;
+            padding: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-card h3 {
+            color: #2196F3;
+            margin-bottom: 20px;
+        }
+        
+        .contact-card p {
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        .highlight-box {
+            background-color: #e3f2fd;
+            border: 1px solid #2196F3;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        
+        .highlight-box p {
+            color: #333;
+            font-weight: 500;
+            margin: 0;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .about-details {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+            }
+            
+            .about-intro h2, .values-section h2, .team-section h2, .contact-section h2 {
+                font-size: 1.8rem;
+            }
+        }
+        
+        /* Footer styling */
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+        }
+        
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="images/wadaba logo.png" alt="WADABA Logo">
+                    <span>WADABA</span>
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="get-involved.html">Get Involved</a></li>
+            </ul>
+            <div class="mobile-menu-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Privacy Policy</h1>
+            <p>How we collect, use, and protect your personal information</p>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="about-intro">
+            <h2>Policy Summary</h2>
+            <div class="highlight-box">
+                <p><strong>WADABA (Water Data Bank)</strong> collects some Personal Data from its Users to provide water data services, citizen science platforms, and community engagement tools.</p>
+            </div>
+        </div>
+
+        <div class="about-details">
+            <div class="about-details-card">
+                <h3><i class="fas fa-chart-line"></i> Analytics & Usage Data</h3>
+                <p><strong>Google Analytics & Platform Analytics</strong></p>
+                <ul>
+                    <li>Tracker and Usage Data</li>
+                    <li>Geographic Location</li>
+                    <li>Device Information</li>
+                </ul>
+            </div>
+            <div class="about-details-card">
+                <h3><i class="fas fa-envelope"></i> Contact & Communication</h3>
+                <p><strong>Contact Forms & Newsletter</strong></p>
+                <ul>
+                    <li>First Name and Last Name</li>
+                    <li>Email Address</li>
+                    <li>Organization/Affiliation</li>
+                </ul>
+            </div>
+            <div class="about-details-card">
+                <h3><i class="fas fa-tint"></i> Water Data Collection</h3>
+                <p><strong>Citizen Science Data</strong></p>
+                <ul>
+                    <li>Name and Location Data</li>
+                    <li>Water Quality Measurements</li>
+                    <li>Photos and GPS Coordinates</li>
+                </ul>
+            </div>
+            <div class="about-details-card">
+                <h3><i class="fas fa-graduation-cap"></i> Training & Events</h3>
+                <p><strong>Registration Information</strong></p>
+                <ul>
+                    <li>Name, Email, Phone Number</li>
+                    <li>Organization Details</li>
+                    <li>Professional Background</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section class="values-section">
+        <h2>Your Rights & Our Commitments</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Data Security</h3>
+                <p>We implement appropriate technical and organizational measures to protect your personal data from unauthorized access, disclosure, or destruction.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <h3>Transparency</h3>
+                <p>You have the right to know what data we collect, how we use it, and who we share it with. We provide clear information about our data practices.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-user-check"></i>
+                </div>
+                <h3>Your Control</h3>
+                <p>You can access, correct, delete, or restrict the processing of your personal data. You can also withdraw consent at any time.</p>
+            </div>
+            <div class="value-card">
+                <div class="value-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <h3>Data Retention</h3>
+                <p>We only keep your data as long as necessary for the purposes we collected it, with specific retention periods for different types of data.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="team-section">
+        <h2>Detailed Privacy Information</h2>
+        
+        <div class="policy-content">
+            <h3>Types of Data We Collect</h3>
+            <p>WADABA collects various types of personal data to provide our water data and citizen science services:</p>
+            <ul>
+                <li><strong>Contact Information:</strong> Name, email address, phone number, and organizational affiliation</li>
+                <li><strong>Location Data:</strong> GPS coordinates and geographic information for water monitoring</li>
+                <li><strong>Water Quality Data:</strong> Measurements, photos, and observations submitted by citizen scientists</li>
+                <li><strong>Usage Data:</strong> Information about how you interact with our platform and services</li>
+                <li><strong>Professional Information:</strong> Background and expertise for training and collaboration purposes</li>
+            </ul>
+        </div>
+
+        <div class="policy-content">
+            <h3>How We Use Your Data</h3>
+            <p>We process your personal data for the following purposes:</p>
+            <ul>
+                <li><strong>Service Provision:</strong> To provide water data services and platform access</li>
+                <li><strong>Research:</strong> For scientific research and environmental monitoring (with appropriate anonymization)</li>
+                <li><strong>Communication:</strong> To send newsletters, updates, and respond to inquiries</li>
+                <li><strong>Training:</strong> To organize workshops and capacity building programs</li>
+                <li><strong>Platform Improvement:</strong> To analyze usage and improve our services</li>
+            </ul>
+        </div>
+
+        <div class="policy-content">
+            <h3>Legal Basis for Processing</h3>
+            <p>We process your personal data based on:</p>
+            <ul>
+                <li><strong>Consent:</strong> When you agree to participate in citizen science or receive communications</li>
+                <li><strong>Legitimate Interest:</strong> For research and environmental protection purposes</li>
+                <li><strong>Public Interest:</strong> Water resource management and environmental monitoring</li>
+                <li><strong>Legal Obligation:</strong> Compliance with environmental and research regulations</li>
+            </ul>
+        </div>
+
+        <div class="policy-content">
+            <h3>Data Retention Periods</h3>
+            <p>We retain your data for specific periods based on the purpose:</p>
+            <ul>
+                <li><strong>Water Quality Data:</strong> Up to 10 years for long-term environmental monitoring</li>
+                <li><strong>Contact Information:</strong> As long as you maintain an active relationship with WADABA</li>
+                <li><strong>Training Records:</strong> 5 years for certification and follow-up purposes</li>
+                <li><strong>Usage Analytics:</strong> 2 years for platform improvement</li>
+            </ul>
+        </div>
+
+        <div class="policy-content">
+            <h3>Your Rights</h3>
+            <p>Under applicable data protection laws, you have the right to:</p>
+            <ul>
+                <li><strong>Access:</strong> Request a copy of your personal data we hold</li>
+                <li><strong>Rectification:</strong> Correct inaccurate or incomplete information</li>
+                <li><strong>Erasure:</strong> Request deletion of your personal data (subject to legal obligations) - <a href="https://forms.gle/9sJ5uhAqWZ41e7tz6" target="_blank" style="color: #2196F3; text-decoration: none; font-weight: 500;">Delete data</a></li>
+                <li><strong>Restriction:</strong> Limit how we process your data in certain circumstances</li>
+                <li><strong>Portability:</strong> Receive your data in a structured, machine-readable format</li>
+                <li><strong>Objection:</strong> Object to processing based on legitimate interests</li>
+                <li><strong>Withdraw Consent:</strong> Withdraw consent for voluntary data processing</li>
+            </ul>
+        </div>
+
+        <div class="policy-content">
+            <h3>Data Sharing and Transfers</h3>
+            <p>We may share your data in the following circumstances:</p>
+            <ul>
+                <li><strong>Research Partners:</strong> Anonymized data with academic institutions and research organizations</li>
+                <li><strong>Government Agencies:</strong> Aggregated water data for policy development</li>
+                <li><strong>Service Providers:</strong> Third-party services that help us operate our platform</li>
+                <li><strong>Legal Requirements:</strong> When required by law or to protect our rights</li>
+            </ul>
+            <p>Data may be transferred internationally for research collaborations, with appropriate safeguards in place.</p>
+        </div>
+    </section>
+
+    <section class="contact-section">
+        <h2>Contact Our Data Protection Team</h2>
+        <div class="contact-card">
+            <h3><i class="fas fa-envelope"></i> Get in Touch</h3>
+            <p><strong>Privacy Email:</strong> privacy@wadaba.org</p>
+            <p><strong>General Contact:</strong> info@wadaba.org</p>
+            <p><strong>Mailing Address:</strong><br>
+            WADABA Data Protection Team<br>
+            OIC, Buea, Cameroon</p>
+            <p><strong>Response Time:</strong> We respond to privacy requests within 30 days</p>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 WADABA - Water Data Bank. All Rights Reserved. | Last Updated: May 2025</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
